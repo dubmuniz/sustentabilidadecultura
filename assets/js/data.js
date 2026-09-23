@@ -11,10 +11,31 @@ window.SITE_DATA = {
   // Coloque o arquivo do CV em assets/cv/ com este nome
   cvUrl: "assets/cv/cv-bruno-barboza-muniz.pdf",
 
+  // Publicação em destaque (Início e topo da aba Pesquisa)
+  destaque: {
+    selo: "Artigo de opinião · JOTA · 2026",
+    titulo: "Quem financia o ‘vale da morte’ da inovação em saúde?",
+    texto:
+      "O Brasil produz ciência, mas ainda não estruturou o financiamento necessário para levar uma descoberta até o sistema de saúde. O artigo discute essa lacuna entre a pesquisa e o produto e defende que ela se torne objeto de política pública.",
+    url: "https://www.jota.info/opiniao-e-analise/artigos/quem-financia-o-vale-da-morte-da-inovacao-em-saude",
+    botao: "Ler no JOTA",
+  },
+
   /*
-   * tipo: "artigo" | "tese" | "comunicacao" | "audiovisual"
+   * tipo: "opiniao" | "artigo" | "tese" | "comunicacao" | "audiovisual"
    */
   publicacoes: [
+    {
+      tipo: "opiniao",
+      ano: 2026,
+      autores: "Muniz, B. B.",
+      titulo: "Quem financia o ‘vale da morte’ da inovação em saúde?",
+      veiculo: "JOTA – Opinião & Análise",
+      resumo:
+        "Sobre a lacuna de financiamento entre a produção científica e a chegada de novas tecnologias ao sistema de saúde, e por que ela precisa se tornar política pública.",
+      url: "https://www.jota.info/opiniao-e-analise/artigos/quem-financia-o-vale-da-morte-da-inovacao-em-saude",
+      rotulo: "JOTA",
+    },
     {
       tipo: "artigo",
       ano: 2024,
@@ -143,8 +164,9 @@ window.SITE_DATA = {
       periodo: "Estreia em 6 jun. 2025 · SESI Firjan Macaé",
       descricao:
         "Espetáculo que conecta música, moda, instalação e performance para celebrar a cultura popular periférica do Rio. Inspirado nos bate-bolas e nos parangolés de Hélio Oiticica, reúne o rapper Jeza da Pedra e a banda MEXITAPI, com figurinos em upcycling, projeções, aromas e trilhas que mesclam rap, dub, funk e eletrônico.",
-      numeros: ["Patrocínio: edital Mosaico"],
+      numeros: ["Patrocínio: edital Mosaico", "Organização e produção"],
       imagem: "assets/img/projetos/parangole.jpg",
+      video: "R3_TQLECKzI",
       url: "",
     },
     {

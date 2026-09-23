@@ -20,7 +20,7 @@
   if (data.cvUrl) document.getElementById("cv-link").href = data.cvUrl;
 
   // Publicações
-  var TIPOS = { artigo: "Artigo", tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" };
+  var TIPOS = { opiniao: "Opinião", artigo: "Artigo", tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" };
   var pubs = (data.publicacoes || []).slice().sort(function (a, b) { return (b.ano || 0) - (a.ano || 0); });
   var pubList = document.getElementById("pubs");
   pubList.innerHTML = pubs.map(function (p) {
@@ -50,7 +50,10 @@
 
   // Projetos
   document.getElementById("projetos-grid").innerHTML = (data.projetos || []).map(function (p) {
-    var media = p.imagem
+    var media = p.video
+      ? '<button type="button" class="project__img project__play" data-video="' + esc(p.video) + '" aria-label="Assistir vídeo: ' + esc(p.titulo) + '">' +
+        (p.imagem ? '<img src="' + esc(p.imagem) + '" alt="">' : "") + '<span class="play" aria-hidden="true"></span><span class="play__label">Assistir ao vídeo</span></button>'
+      : p.imagem
       ? '<img class="project__img" src="' + esc(p.imagem) + '" alt="" loading="lazy">'
       : '<div class="project__img project__img--empty" aria-hidden="true">' + LOGO + "</div>";
     return '<article class="card project">' + media +
@@ -60,6 +63,7 @@
       "<p>" + esc(p.descricao) + "</p>" +
       (p.numeros && p.numeros.length ? '<ul class="project__nums">' + p.numeros.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
       (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">Saiba mais ↗</a>' : "") +
+      (p.video ? '<a class="pub__link" href="https://www.youtube.com/watch?v=' + esc(p.video) + '" target="_blank" rel="noopener">Ver no YouTube ↗</a>' : "") +
       "</div></article>";
   }).join("");
 
@@ -72,6 +76,29 @@
       '<img src="' + esc(p.imagem) + '" alt="" loading="lazy">' +
       '<span class="mosaic__cap"><small>' + esc(p.categoria) + "</small>" + esc(p.titulo) + "</span></a>";
   }).join("");
+
+  // Publicação em destaque
+  var d = data.destaque;
+  document.querySelectorAll("[data-destaque]").forEach(function (el) {
+    if (!d) { el.remove(); return; }
+    el.innerHTML = '<p class="feature__tag">' + esc(d.selo) + "</p>" +
+      "<h3>" + esc(d.titulo) + "</h3><p>" + esc(d.texto) + "</p>" +
+      '<a class="btn btn--light" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.botao || "Ler") + " ↗</a>";
+  });
+
+  // Vídeo: carrega o YouTube só quando a pessoa clica
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-video]");
+    if (!btn) return;
+    var id = btn.getAttribute("data-video");
+    var frame = document.createElement("iframe");
+    frame.className = "project__img project__video";
+    frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&rel=0";
+    frame.title = btn.getAttribute("aria-label");
+    frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    frame.allowFullscreen = true;
+    btn.replaceWith(frame);
+  });
 
   // Galeria (Projetos)
   document.getElementById("galeria").innerHTML = (data.galeria || []).map(function (g) {
