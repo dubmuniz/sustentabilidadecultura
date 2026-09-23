@@ -32,6 +32,7 @@ a { color: var(--olive-dark); }
 a:hover { color: var(--forest); }
 strong { font-weight: 500; color: var(--forest); }
 :focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+[tabindex="-1"]:focus { outline: none; }
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 .skip { position: absolute; left: -9999px; }

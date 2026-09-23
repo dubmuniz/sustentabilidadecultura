@@ -76,6 +76,7 @@
     document.body.classList.toggle("on-hero", name === "inicio");
     closeMenu();
     window.scrollTo(0, 0);
+    setTimeout(function () { window.scrollTo(0, 0); }, 0);
     if (focus) {
       var h = document.querySelector('[data-tab="' + name + '"] h1, [data-tab="' + name + '"] h2');
       if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
