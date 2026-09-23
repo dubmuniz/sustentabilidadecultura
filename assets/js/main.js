@@ -54,11 +54,28 @@
       ? '<img class="project__img" src="' + esc(p.imagem) + '" alt="" loading="lazy">'
       : '<div class="project__img project__img--empty" aria-hidden="true">' + LOGO + "</div>";
     return '<article class="card project">' + media +
-      '<div class="project__body"><p class="project__cat">' + esc(p.categoria) +
-      (p.periodo ? " · " + esc(p.periodo) : "") + "</p>" +
-      "<h4>" + esc(p.titulo) + "</h4><p>" + esc(p.descricao) + "</p>" +
+      '<div class="project__body"><p class="project__cat">' + esc(p.categoria) + "</p>" +
+      "<h4>" + esc(p.titulo) + "</h4>" +
+      (p.periodo ? '<p class="project__when">' + esc(p.periodo) + "</p>" : "") +
+      "<p>" + esc(p.descricao) + "</p>" +
+      (p.numeros && p.numeros.length ? '<ul class="project__nums">' + p.numeros.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
       (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">Saiba mais ↗</a>' : "") +
       "</div></article>";
+  }).join("");
+
+  // Números de impacto e destaques (Início)
+  document.getElementById("stats").innerHTML = (data.numeros || []).map(function (n) {
+    return '<li><span class="stats__v">' + esc(n.valor) + '</span><span class="stats__k">' + esc(n.rotulo) + "</span></li>";
+  }).join("");
+  document.getElementById("mosaic").innerHTML = (data.projetos || []).filter(function (p) { return p.imagem; }).map(function (p) {
+    return '<a class="mosaic__item" href="#projetos" data-tab-link="projetos">' +
+      '<img src="' + esc(p.imagem) + '" alt="" loading="lazy">' +
+      '<span class="mosaic__cap"><small>' + esc(p.categoria) + "</small>" + esc(p.titulo) + "</span></a>";
+  }).join("");
+
+  // Galeria (Projetos)
+  document.getElementById("galeria").innerHTML = (data.galeria || []).map(function (g) {
+    return '<figure><img src="' + esc(g.src) + '" alt="' + esc(g.legenda) + '" loading="lazy"><figcaption>' + esc(g.legenda) + "</figcaption></figure>";
   }).join("");
 
   // Abas (navegação por hash)

@@ -6,8 +6,7 @@
 
 window.SITE_DATA = {
   // Link do portfólio completo (Adobe Express)
-  portfolioUrl:
-    "https://new.express.adobe.com/webpage/design/urn:aaid:sc:US:d6edff72-5a8b-59aa-8266-95ac573e91fe?accept=true&invite=true&promoid=Z662FLTQ&mv=other",
+  portfolioUrl: "https://new.express.adobe.com/webpage/VbRZKnf9rPtqm",
 
   // Coloque o arquivo do CV em assets/cv/ com este nome
   cvUrl: "assets/cv/cv-bruno-barboza-muniz.pdf",
@@ -115,37 +114,67 @@ window.SITE_DATA = {
     { nome: "Escavador", url: "https://www.escavador.com/sobre/2839126/bruno-barboza-muniz" },
   ],
 
+  // Números de destaque (aba Início)
+  numeros: [
+    { valor: "R$ 4,5 mi", rotulo: "captados entre 2021 e 2025" },
+    { valor: "450", rotulo: "crianças e adolescentes no Vem Viver (PNUD)" },
+    { valor: "4.000+", rotulo: "estudantes alcançados pelo Vizinho do Bem" },
+    { valor: "1.862", rotulo: "empreendimentos solidários na plataforma EcoSol" },
+  ],
+
   /*
-   * Projetos. Para incluir imagem, salve em assets/img/projetos/
-   * e informe o caminho em "imagem".
+   * Projetos. Imagens ficam em assets/img/projetos/.
+   * "numeros" é opcional: pequenos destaques exibidos no card.
    */
   projetos: [
     {
-      titulo: "Programas de oportunidades e captação",
-      categoria: "Captação de recursos",
-      periodo: "2026 —",
+      titulo: "Vizinho do Bem",
+      categoria: "Educação ambiental · MRV",
+      periodo: "Captação + coordenação · 2023–2025",
       descricao:
-        "Radar de editais, prêmios e fundos, priorização de candidaturas e construção de bases reutilizáveis de materiais para organizações de impacto socioambiental e cultural.",
-      imagem: "",
+        "Projeto socioeducativo que fortalece vínculos comunitários em bairros periféricos com educação ambiental, cultura maker e empreendedorismo social. Recursos captados junto à MRV Engenharia por meio de sua política de investimento social privado. Sua frente mais inovadora é a Smart Horta: hortas escolares inteligentes com sensores e automação, usadas como espaço de aprendizagem sobre sustentabilidade, alimentação, ciências e cidadania.",
+      numeros: ["100 adolescentes inscritos", "4.000+ estudantes impactados"],
+      imagem: "assets/img/projetos/smart-horta.jpg",
       url: "",
     },
     {
-      titulo: "Funk é Cultura",
-      categoria: "Pesquisa e audiovisual",
-      periodo: "Doutorado · LSE",
+      titulo: "Parangolé Bate-Bola",
+      categoria: "Cultura · Edital Mosaico",
+      periodo: "Estreia em 6 jun. 2025 · SESI Firjan Macaé",
       descricao:
-        "Pesquisa de doutorado e documentário sobre o movimento que reuniu artistas, pesquisadores e estudantes contra a criminalização do baile funk no Rio de Janeiro.",
-      imagem: "",
-      url: "https://www.academia.edu/20135625/Funk_is_Culture_Music_Politics_in_Brazil",
+        "Espetáculo que conecta música, moda, instalação e performance para celebrar a cultura popular periférica do Rio. Inspirado nos bate-bolas e nos parangolés de Hélio Oiticica, reúne o rapper Jeza da Pedra e a banda MEXITAPI, com figurinos em upcycling, projeções, aromas e trilhas que mesclam rap, dub, funk e eletrônico.",
+      numeros: ["Patrocínio: edital Mosaico"],
+      imagem: "assets/img/projetos/parangole.jpg",
+      url: "",
     },
     {
-      titulo: "POLITICS — CES / Universidade de Coimbra",
-      categoria: "Pesquisa internacional",
-      periodo: "Pós-doutorado",
+      titulo: "Plataforma Solidária EcoSol Bahia",
+      categoria: "Economia solidária · Tecnologia",
+      periodo: "Captação + coordenação · 2022–2023",
       descricao:
-        "Investigação sobre raça, racismo institucional e produção de conhecimento, com trabalho comparado entre Rio de Janeiro e Lisboa.",
-      imagem: "",
-      url: "https://politics.ces.uc.pt/",
+        "Soluções digitais para o comércio justo: apoio à comercialização de produtos da economia solidária e organização, sistematização e apresentação dos dados do CadCidadão no estado da Bahia. O projeto também iniciou o CadCesol, sistema que substituirá o CadCidadão.",
+      numeros: ["1.862 dados parametrizados", "60 EES diagnosticados", "6 municípios"],
+      imagem: "assets/img/projetos/ecosol.jpg",
+      url: "",
     },
+    {
+      titulo: "Vem Viver",
+      categoria: "Educação e comunidade · PNUD",
+      periodo: "Captação + coordenação · 2020–2023",
+      descricao:
+        "Programa financiado pelo Programa das Nações Unidas para o Desenvolvimento (PNUD) que engajou crianças em atividades extracurriculares e promoveu um ambiente comunitário mais seguro e solidário.",
+      numeros: ["5 escolas", "55+ professores formados", "296 famílias", "450 crianças e adolescentes"],
+      imagem: "assets/img/projetos/vem-viver-numeros.jpg",
+      url: "",
+    },
+  ],
+
+  // Galeria de imagens (aba Projetos)
+  galeria: [
+    { src: "assets/img/projetos/vizinho-do-bem-equipe.jpg", legenda: "Equipe do Vizinho do Bem" },
+    { src: "assets/img/projetos/parangole-2.jpg", legenda: "Parangolé Bate-Bola" },
+    { src: "assets/img/projetos/mudas.jpg", legenda: "Mudas da Smart Horta" },
+    { src: "assets/img/projetos/guaras.jpg", legenda: "Guarás" },
+    { src: "assets/img/projetos/horta.jpg", legenda: "Horta escolar" },
   ],
 };
