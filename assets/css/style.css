@@ -225,6 +225,12 @@ h1 em, h2 em { color: var(--sage); }
 .timeline__when { font: 500 .78rem/2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--olive-dark); }
 .timeline p { margin: .15rem 0 0; font-size: .95rem; }
 
+.edu { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem; }
+.edu li { display: flex; flex-direction: column; border-left: 3px solid var(--olive); padding-left: 1rem; }
+.edu span { font-size: .9rem; color: var(--muted); }
+.langs { margin: 1.5rem 0 0; font-size: .92rem; color: var(--muted); }
+@media (max-width: 560px) { .edu { grid-template-columns: 1fr; } }
+
 /* Pesquisa */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
 .chip {
