@@ -20,7 +20,7 @@
   if (data.cvUrl) document.getElementById("cv-link").href = data.cvUrl;
 
   // Publicações
-  var TIPOS = { opiniao: "Opinião", artigo: "Artigo", tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" };
+  var TIPOS = { opiniao: "Opinião", artigo: "Artigo", capitulo: "Capítulo", anais: "Anais",  tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" };
   var pubs = (data.publicacoes || []).slice().sort(function (a, b) { return (b.ano || 0) - (a.ano || 0); });
   var pubList = document.getElementById("pubs");
   pubList.innerHTML = pubs.map(function (p) {
@@ -43,6 +43,20 @@
       });
     });
   });
+
+  // Apresentações e organização de eventos
+  function eventList(id, list, sub) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = (list || []).map(function (e) {
+      var title = esc(e.titulo);
+      if (e.url) title = '<a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + title + " ↗</a>";
+      return '<li><span class="events__year">' + esc(e.ano) + '</span><div><span class="events__title">' + title + "</span>" +
+        (e[sub] ? '<span class="events__where">' + esc(e[sub]) + "</span>" : "") + "</div></li>";
+    }).join("");
+  }
+  eventList("eventos", data.eventos, "evento");
+  eventList("organizacao", data.organizacao, "nota");
 
   document.getElementById("perfis").innerHTML = (data.perfis || []).map(function (p) {
     return '<li><a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.nome) + " ↗</a></li>";
