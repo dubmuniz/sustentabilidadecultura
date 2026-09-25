@@ -67,11 +67,115 @@
       "</div></article>";
   }).join("");
 
+  // Carrossel de novidades (Início)
+  (function carousel() {
+    var track = document.getElementById("carousel-track");
+    var items = data.novidades || [];
+    if (!track || !items.length) return;
+
+    function art(a) {
+      if (!a) return '<div class="hero__art" aria-hidden="true">' + LOGO + "</div>";
+      if (a.imagem) {
+        return '<figure class="art-photo"><img src="' + esc(a.imagem) + '" alt="' + esc(a.legenda || "") + '">' +
+          (a.legenda ? "<figcaption>" + esc(a.legenda) + "</figcaption>" : "") + "</figure>";
+      }
+      if (a.numero) {
+        return '<div class="art-number" aria-hidden="true"><strong>' + esc(a.numero) + "</strong><span>" + esc(a.rotulo || "") + "</span></div>";
+      }
+      return '<div class="art-cover" aria-hidden="true"><span class="brand__mark">' + LOGO + "</span><div><strong>" +
+        esc(a.capa) + "</strong><br><span>" + esc(a.sub || "") + "</span></div></div>";
+    }
+
+    items.forEach(function (n) {
+      var external = /^https?:/.test(n.link || "");
+      var btn = n.link
+        ? '<a class="btn btn--light" href="' + esc(n.link) + '"' +
+          (external ? ' target="_blank" rel="noopener"' : ' data-tab-link="' + esc(n.link.slice(1)) + '"') + ">" +
+          esc(n.botao || "Saiba mais") + (external ? " ↗" : "") + "</a>"
+        : "";
+      var el = document.createElement("article");
+      el.className = "slide";
+      el.setAttribute("aria-roledescription", "slide");
+      el.innerHTML = '<div class="wrap hero__grid"><div class="hero__text">' +
+        '<p class="eyebrow">' + esc(n.selo) + "</p>" +
+        '<h2 class="hero__title">' + esc(n.titulo) + (n.destaque ? " <em>" + esc(n.destaque) + "</em>" : "") + "</h2>" +
+        '<p class="lead">' + esc(n.texto) + "</p>" +
+        '<div class="hero__actions">' + btn + "</div></div>" + art(n.arte) + "</div>";
+      track.appendChild(el);
+    });
+
+    var slides = Array.prototype.slice.call(track.children);
+    var controls = document.querySelector(".carousel__controls");
+    var dotsBox = controls.querySelector(".carousel__dots");
+    var pauseBtn = controls.querySelector("[data-carousel=pause]");
+    var current = 0, timer = null, paused = false, hovering = false;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var DELAY = 7000;
+
+    slides.forEach(function (sl, i) {
+      sl.setAttribute("aria-label", (i + 1) + " de " + slides.length);
+      var d = document.createElement("button");
+      d.type = "button";
+      d.setAttribute("aria-label", "Destaque " + (i + 1));
+      d.addEventListener("click", function () { go(i); restart(); });
+      dotsBox.appendChild(d);
+    });
+    var dots = Array.prototype.slice.call(dotsBox.children);
+
+    function go(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach(function (sl, k) {
+        var on = k === current;
+        sl.classList.toggle("is-active", on);
+        sl.setAttribute("aria-hidden", String(!on));
+        sl.querySelectorAll("a, button").forEach(function (f) { f.tabIndex = on ? 0 : -1; });
+      });
+      dots.forEach(function (d, k) { d.setAttribute("aria-current", String(k === current)); });
+    }
+    function tick() { go(current + 1); }
+    function stop() { clearInterval(timer); timer = null; }
+    function restart() {
+      stop();
+      if (!paused && !hovering && !reduce) timer = setInterval(tick, DELAY);
+    }
+
+    controls.querySelector("[data-carousel=prev]").addEventListener("click", function () { go(current - 1); restart(); });
+    controls.querySelector("[data-carousel=next]").addEventListener("click", function () { go(current + 1); restart(); });
+    pauseBtn.addEventListener("click", function () {
+      paused = !paused;
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", paused ? "Retomar troca automática" : "Pausar troca automática");
+      pauseBtn.textContent = paused ? "▶" : "❚❚";
+      restart();
+    });
+
+    var box = track.parentNode;
+    box.addEventListener("mouseenter", function () { hovering = true; stop(); });
+    box.addEventListener("mouseleave", function () { hovering = false; restart(); });
+    box.addEventListener("focusin", function () { hovering = true; stop(); });
+    box.addEventListener("focusout", function () { hovering = false; restart(); });
+
+    // Deslizar no celular
+    var x0 = null;
+    box.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) { go(current + (dx < 0 ? 1 : -1)); restart(); }
+      x0 = null;
+    });
+
+    if (reduce) { paused = true; pauseBtn.hidden = true; }
+    controls.hidden = false;
+    go(0);
+    restart();
+  })();
+
   // Números de impacto e destaques (Início)
   document.getElementById("stats").innerHTML = (data.numeros || []).map(function (n) {
     return '<li><span class="stats__v">' + esc(n.valor) + '</span><span class="stats__k">' + esc(n.rotulo) + "</span></li>";
   }).join("");
-  document.getElementById("mosaic").innerHTML = (data.projetos || []).filter(function (p) { return p.imagem; }).map(function (p) {
+  document.getElementById("mosaic").innerHTML = (data.projetos || []).filter(function (p) { return p.imagem; }).slice(0, 4).map(function (p) {
     return '<a class="mosaic__item" href="#projetos" data-tab-link="projetos">' +
       '<img src="' + esc(p.imagem) + '" alt="" loading="lazy">' +
       '<span class="mosaic__cap"><small>' + esc(p.categoria) + "</small>" + esc(p.titulo) + "</span></a>";

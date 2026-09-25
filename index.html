@@ -40,17 +40,29 @@
 
     <!-- INÍCIO -->
     <section id="inicio" class="tab hero" data-tab="inicio">
-      <div class="wrap hero__grid">
-        <div class="hero__text">
-          <p class="eyebrow">Rio de Janeiro · Pesquisa · Cultura · Impacto</p>
-          <h1>Conhecimento que<br>vira <em>transformação</em></h1>
-          <p class="lead">Unimos pesquisa em ciências sociais, cultura e sustentabilidade para desenhar projetos, captar recursos e ampliar o impacto de organizações que cuidam de pessoas e territórios.</p>
-          <div class="hero__actions">
-            <a class="btn btn--light" href="#projetos" data-tab-link="projetos">Conheça os projetos</a>
-            <a class="btn btn--ghost" href="#pesquisa" data-tab-link="pesquisa">Ver pesquisas</a>
-          </div>
+      <div class="carousel" aria-roledescription="carrossel" aria-label="Destaques">
+        <div class="carousel__track" id="carousel-track" aria-live="off">
+          <article class="slide is-active" aria-roledescription="slide">
+            <div class="wrap hero__grid">
+              <div class="hero__text">
+                <p class="eyebrow">Rio de Janeiro · Pesquisa · Cultura · Impacto</p>
+                <h1 class="hero__title">Conhecimento que<br>vira <em>transformação</em></h1>
+                <p class="lead">Unimos pesquisa em ciências sociais, cultura e sustentabilidade para desenhar projetos, captar recursos e ampliar o impacto de organizações que cuidam de pessoas e territórios.</p>
+                <div class="hero__actions">
+                  <a class="btn btn--light" href="#projetos" data-tab-link="projetos">Conheça os projetos</a>
+                  <a class="btn btn--ghost" href="#pesquisa" data-tab-link="pesquisa">Ver pesquisas</a>
+                </div>
+              </div>
+              <div class="hero__art" aria-hidden="true" data-logo></div>
+            </div>
+          </article>
         </div>
-        <div class="hero__art" aria-hidden="true" data-logo></div>
+        <div class="carousel__controls wrap" hidden>
+          <button type="button" class="carousel__btn" data-carousel="prev" aria-label="Destaque anterior">‹</button>
+          <div class="carousel__dots" role="group" aria-label="Escolher destaque"></div>
+          <button type="button" class="carousel__btn" data-carousel="next" aria-label="Próximo destaque">›</button>
+          <button type="button" class="carousel__btn carousel__pause" data-carousel="pause" aria-label="Pausar troca automática" aria-pressed="false">❚❚</button>
+        </div>
       </div>
       <div class="hero__strip">
         <div class="wrap strip">
@@ -63,8 +75,6 @@
         <div class="wrap">
           <p class="num">Impacto <span></span></p>
           <ul class="stats" id="stats"></ul>
-
-          <div class="feature" data-destaque></div>
 
           <div class="home-head">
             <h2>Projetos em destaque</h2>
