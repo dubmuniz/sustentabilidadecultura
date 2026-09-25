@@ -73,17 +73,25 @@
     var items = data.novidades || [];
     if (!track || !items.length) return;
 
+    // Curva da pesquisa ao sistema de saúde, passando pelo "vale da morte"
+    var VALE = '<svg class="art-vale" viewBox="0 0 480 400" aria-hidden="true">' +
+      '<circle cx="318" cy="178" r="128" class="vale__sun"/>' +
+      '<line x1="24" y1="330" x2="456" y2="330" class="vale__base"/>' +
+      '<path d="M40 120 H116 C176 120 176 300 240 300 C304 300 300 96 362 92 H436" class="vale__line"/>' +
+      '<path d="M424 80 L440 92 L424 104" class="vale__line"/>' +
+      '<circle cx="40" cy="120" r="7" class="vale__dot"/>' +
+      '<circle cx="240" cy="300" r="7" class="vale__dot vale__dot--low"/>' +
+      '<text x="40" y="96" class="vale__label">Pesquisa</text>' +
+      '<text x="240" y="364" text-anchor="middle" class="vale__label vale__label--em">vale da morte</text>' +
+      '<text x="440" y="66" text-anchor="end" class="vale__label">Sistema de saúde</text>' +
+      "</svg>";
+
     function art(a) {
       if (!a) return '<div class="hero__art" aria-hidden="true">' + LOGO + "</div>";
-      if (a.imagem) {
-        return '<figure class="art-photo"><img src="' + esc(a.imagem) + '" alt="' + esc(a.legenda || "") + '">' +
-          (a.legenda ? "<figcaption>" + esc(a.legenda) + "</figcaption>" : "") + "</figure>";
-      }
-      if (a.numero) {
-        return '<div class="art-number" aria-hidden="true"><strong>' + esc(a.numero) + "</strong><span>" + esc(a.rotulo || "") + "</span></div>";
-      }
-      return '<div class="art-cover" aria-hidden="true"><span class="brand__mark">' + LOGO + "</span><div><strong>" +
-        esc(a.capa) + "</strong><br><span>" + esc(a.sub || "") + "</span></div></div>";
+      if (a.ilustracao === "vale") return '<div class="hero__art hero__art--vale">' + VALE + "</div>";
+      return '<figure class="art-photo"><div class="art-photo__frame"><img src="' + esc(a.imagem) + '" alt="' + esc(a.legenda || "") + '">' +
+        (a.selo ? '<p class="art-photo__badge"><strong>' + esc(a.selo.numero) + "</strong>" + esc(a.selo.rotulo || "") + "</p>" : "") +
+        "</div>" + (a.legenda ? "<figcaption>" + esc(a.legenda) + "</figcaption>" : "") + "</figure>";
     }
 
     items.forEach(function (n) {
@@ -111,6 +119,8 @@
     var current = 0, timer = null, paused = false, hovering = false;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var DELAY = 7000;
+    var box = track.parentNode;
+    box.style.setProperty("--carousel-delay", DELAY + "ms");
 
     slides.forEach(function (sl, i) {
       sl.setAttribute("aria-label", (i + 1) + " de " + slides.length);
@@ -136,7 +146,20 @@
     function stop() { clearInterval(timer); timer = null; }
     function restart() {
       stop();
-      if (!paused && !hovering && !reduce) timer = setInterval(tick, DELAY);
+      var running = !paused && !hovering && !reduce;
+      box.classList.toggle("is-running", running);
+      // reinicia a barra de progresso do indicador ativo
+      dots.forEach(function (d) { d.classList.remove("is-filling"); });
+      if (running) {
+        void dotsBox.offsetWidth;
+        dots[current].classList.add("is-filling");
+        timer = setInterval(function () {
+          tick();
+          dots.forEach(function (d) { d.classList.remove("is-filling"); });
+          void dotsBox.offsetWidth;
+          dots[current].classList.add("is-filling");
+        }, DELAY);
+      }
     }
 
     controls.querySelector("[data-carousel=prev]").addEventListener("click", function () { go(current - 1); restart(); });
@@ -149,7 +172,6 @@
       restart();
     });
 
-    var box = track.parentNode;
     box.addEventListener("mouseenter", function () { hovering = true; stop(); });
     box.addEventListener("mouseleave", function () { hovering = false; restart(); });
     box.addEventListener("focusin", function () { hovering = true; stop(); });

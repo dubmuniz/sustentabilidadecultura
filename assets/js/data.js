@@ -13,30 +13,24 @@ window.SITE_DATA = {
 
   /*
    * Novidades do carrossel da página inicial (depois do slide de apresentação).
-   * arte: { imagem } para foto, { numero, rotulo } para um número em destaque,
-   * ou { capa, sub } para a capa de uma publicação.
+   * arte: { imagem, legenda, selo: { numero, rotulo } } para foto (o selo é opcional)
+   * ou { ilustracao: "vale" } para o desenho do "vale da morte".
    * link: "#aba" abre uma aba do site; endereços https abrem em nova janela.
    */
   novidades: [
     {
       selo: "Projeto aprovado · 2026–2028",
-      titulo: "Rota Viva Javaé",
+      titulo: "Rota Viva Javaé:",
       destaque: "turismo regenerativo na Ilha do Bananal",
       texto:
-        "Rotas guiadas por indígenas Javaé, protocolos de acesso a áreas sensíveis, formação de guias e empreendedores e um edital para iniciativas lideradas por mulheres e jovens.",
-      arte: { imagem: "assets/img/projetos/rota-viva-javae.jpg", legenda: "Juventude Javaé · Ilha do Bananal (TO)" },
+        "R$ 2 milhões captados para dois anos de rotas guiadas por indígenas Javaé, protocolos de acesso a áreas sensíveis, formação de guias e um edital para iniciativas de mulheres e jovens em mais de dez aldeias.",
+      arte: {
+        imagem: "assets/img/projetos/rota-viva-javae.jpg",
+        legenda: "Juventude Javaé · Ilha do Bananal (TO)",
+        selo: { numero: "R$ 2 mi", rotulo: "captados" },
+      },
       link: "#projetos",
       botao: "Conheça o projeto",
-    },
-    {
-      selo: "Captação de recursos",
-      titulo: "R$ 2 milhões para o",
-      destaque: "Rota Viva Javaé",
-      texto:
-        "Recursos captados para dois anos de execução, de junho de 2026 a junho de 2028, com 420 beneficiários diretos e 1.680 indiretos em pelo menos dez aldeias Javaé.",
-      arte: { numero: "R$ 2 mi", rotulo: "captados para 24 meses de projeto" },
-      link: "#projetos",
-      botao: "Ver projetos",
     },
     {
       selo: "Novo artigo · JOTA · 2026",
@@ -44,19 +38,9 @@ window.SITE_DATA = {
       destaque: "‘vale da morte’ da inovação em saúde?",
       texto:
         "O Brasil produz ciência, mas ainda não estruturou o financiamento necessário para levar uma descoberta até o sistema de saúde.",
-      arte: { capa: "JOTA", sub: "Opinião & Análise" },
+      arte: { ilustracao: "vale" },
       link: "https://www.jota.info/opiniao-e-analise/artigos/quem-financia-o-vale-da-morte-da-inovacao-em-saude",
       botao: "Ler no JOTA",
-    },
-    {
-      selo: "Publicação internacional · McGill",
-      titulo: "Law and order in",
-      destaque: "postcolonial racial cities",
-      texto:
-        "Artigo com Luana Xavier Pinto Coelho sobre ações judiciais contra a violência policial racial no Rio de Janeiro e o papel do pensamento jurídico na negação do racismo.",
-      arte: { capa: "McGill", sub: "GLSA Research Series · 2021" },
-      link: "https://glsars.library.mcgill.ca/article/view/127",
-      botao: "Ler o artigo",
     },
   ],
 
