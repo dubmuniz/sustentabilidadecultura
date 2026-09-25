@@ -30,6 +30,8 @@ html = html.replace('<link rel="stylesheet" href="assets/css/style.css">', f"<st
 html = html.replace('<script src="assets/js/data.js"></script>', f"<script>\n{js_data}</script>")
 html = html.replace('<script src="assets/js/main.js"></script>', f"<script>\n{js_main}</script>")
 html = inline_assets(html, ROOT)
+# O arquivo único usa CSS/JS embutidos, então a política de segurança do site não se aplica
+html = re.sub(r'\s*<meta http-equiv="Content-Security-Policy"[^>]*>', "", html)
 
 out = ROOT / "site-instituto.html"
 out.write_text(html)

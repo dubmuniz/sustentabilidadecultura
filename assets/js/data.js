@@ -91,7 +91,7 @@ window.SITE_DATA = {
       veiculo: "Tese de doutorado em Sociologia, London School of Economics and Political Science (LSE)",
       resumo:
         "Analisa como produtores musicais, pesquisadores e estudantes criaram no Rio de Janeiro o movimento “Funk é Cultura”, contra a criminalização dos bailes, a partir de teorias pós-coloniais e de uma leitura crítica de Bourdieu.",
-      url: "http://etheses.lse.ac.uk/3384/",
+      url: "https://etheses.lse.ac.uk/3384/",
       rotulo: "LSE Theses",
     },
     {
