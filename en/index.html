@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube-nocookie.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Institute for Sustainability and Culture</title>
+  <meta name="description" content="Instituto Sustentabilidade e Cultura (Institute for Sustainability and Culture) — applied research, cultural programmes and fundraising for social and environmental impact projects. Rio de Janeiro, Brazil.">
+  <link rel="alternate" hreflang="pt-BR" href="https://sustentabilidadecultura.com.br/">
+  <link rel="alternate" hreflang="en" href="https://sustentabilidadecultura.com.br/en/">
+  <link rel="alternate" hreflang="x-default" href="https://sustentabilidadecultura.com.br/">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#inicio" data-tab-link="inicio">
+        <span class="brand__mark" data-logo></span>
+        <span class="brand__name">Instituto<br>Sustentabilidade e Cultura</span>
+      </a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <a class="lang-switch__item" href="../" data-lang-link="../" hreflang="pt-BR" lang="pt-BR" title="Versão em português">PT</a>
+        <span class="lang-switch__item is-current" aria-current="true">EN</span>
+      </div>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="nav" class="nav" aria-label="Main">
+        <a href="#inicio" data-tab-link="inicio">Home</a>
+        <a href="#instituto" data-tab-link="instituto">Institute</a>
+        <a href="#pesquisador" data-tab-link="pesquisador">Researcher</a>
+        <a href="#pesquisa" data-tab-link="pesquisa">Research</a>
+        <a href="#projetos" data-tab-link="projetos">Projects</a>
+        <a href="#contato" data-tab-link="contato" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- HOME -->
+    <section id="inicio" class="tab hero" data-tab="inicio">
+      <div class="carousel" aria-roledescription="carousel" aria-label="Highlights">
+        <div class="carousel__track" id="carousel-track" aria-live="off">
+          <article class="slide is-active" aria-roledescription="slide">
+            <div class="wrap hero__grid">
+              <div class="hero__text">
+                <p class="eyebrow">Rio de Janeiro · Research · Culture · Impact</p>
+                <h1 class="hero__title">Knowledge that<br>becomes <em>transformation</em></h1>
+                <p class="lead">We bring together social science research, culture and sustainability to design projects, raise funds and expand the impact of organisations that care for people and territories.</p>
+                <div class="hero__actions">
+                  <a class="btn btn--light" href="#projetos" data-tab-link="projetos">See our projects</a>
+                  <a class="btn btn--ghost" href="#pesquisa" data-tab-link="pesquisa">See research</a>
+                </div>
+              </div>
+              <div class="hero__art" aria-hidden="true" data-logo></div>
+            </div>
+          </article>
+        </div>
+        <div class="carousel__controls wrap" hidden>
+          <button type="button" class="carousel__btn" data-carousel="prev" aria-label="Previous highlight">‹</button>
+          <div class="carousel__dots" role="group" aria-label="Choose highlight"></div>
+          <button type="button" class="carousel__btn" data-carousel="next" aria-label="Next highlight">›</button>
+          <button type="button" class="carousel__btn carousel__pause" data-carousel="pause" aria-label="Pause automatic rotation" aria-pressed="false">❚❚</button>
+        </div>
+      </div>
+      <div class="hero__strip">
+        <div class="wrap strip">
+          <div><span class="strip__k">Applied research</span><span class="strip__v">Assessments, evaluation and knowledge production</span></div>
+          <div><span class="strip__k">Fundraising</span><span class="strip__v">Calls for proposals, awards, funds and partnerships</span></div>
+          <div><span class="strip__k">Culture</span><span class="strip__v">Cultural programmes and impact narratives</span></div>
+        </div>
+      </div>
+      <div class="home-more">
+        <div class="wrap">
+          <p class="num">Impact <span></span></p>
+          <ul class="stats" id="stats"></ul>
+
+          <div class="home-head">
+            <h2>Featured projects</h2>
+            <a class="pub__link" href="#projetos" data-tab-link="projetos">See all ↗</a>
+          </div>
+          <div class="mosaic" id="mosaic"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTITUTE -->
+    <section id="instituto" class="tab section" data-tab="instituto">
+      <div class="wrap">
+        <p class="num">01 <span></span></p>
+        <h2>The Institute</h2>
+        <blockquote class="callout">
+          Instituto Sustentabilidade e Cultura (Institute for Sustainability and Culture) is a Rio de Janeiro-based organisation that connects <strong>research</strong>, <strong>culture</strong> and <strong>sustainability</strong> to strengthen social and environmental impact initiatives.
+        </blockquote>
+        <div class="cols">
+          <p>We work at the intersection of academia, public policy and civil society. Our experience comes from international academic research on urban governance, environmental justice, race and culture, and from hands-on fundraising for science, innovation and cultural projects.</p>
+          <p>We help companies, collectives and institutions turn what they already do into competitive proposals: we map opportunities, shape narratives and support applications from start to finish.</p>
+        </div>
+
+        <h3>What we do</h3>
+        <div class="cards cards--3">
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">◎</span>
+            <h4>Opportunity radar</h4>
+            <p>Ongoing mapping of national and international calls, awards, grants and accelerators, prioritised by fit.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">✎</span>
+            <h4>Applications and narrative</h4>
+            <p>Proposal writing, theory of change, budgets and reusable materials that tell a consistent story.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">❖</span>
+            <h4>Research and evaluation</h4>
+            <p>Assessments, qualitative research, impact evaluation and advisory services for cultural, social and environmental projects.</p>
+          </article>
+        </div>
+
+        <h3>Thematic areas</h3>
+        <ul class="tags">
+          <li>Circular economy</li><li>Environmental justice</li><li>Urban governance</li>
+          <li>Culture and territory</li><li>Anti-racist education</li><li>Solidarity economy</li>
+          <li>Innovation and R&amp;D</li><li>Women’s leadership</li><li>Public policy</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- RESEARCHER -->
+    <section id="pesquisador" class="tab section section--cream" data-tab="pesquisador">
+      <div class="wrap">
+        <p class="num">02 <span></span></p>
+        <h2>Bruno Barboza Muniz</h2>
+        <p class="subtitle">Sociologist · Project coordinator · Fundraising</p>
+
+        <div class="profile">
+          <div class="profile__photo">
+            <img src="../assets/img/bruno.jpg" alt="Bruno Barboza Muniz">
+          </div>
+          <div class="profile__bio">
+            <p>Sociologist and project director working on urban governance, environmental justice and public policy in Latin America. He holds a PhD in Sociology from the <strong>London School of Economics and Political Science (LSE)</strong>, supervised by Juan Pablo Pardo-Guerra and co-supervised by Mike Savage and Paul Gilroy.</p>
+            <p>He was a postdoctoral researcher at the <strong>Federal University of Rio de Janeiro (UFRJ)</strong> (2016–2017) and at the <strong>Centre for Social Studies (CES), University of Coimbra</strong> (2017–2022), funded by the European Research Council (ERC) through the POLITICS project on the politics of anti-racism in Europe and Latin America. He has taught as a guest lecturer in the Graduate Programme in Social Anthropology (PPGAS) and at the School of Fine Arts (EBA) at UFRJ.</p>
+            <p>At Humana Povo para Povo Brasil, where he has worked since 2016 and serves as Statutory Director of Projects, he has raised nearly <strong>R$ 4.5 million</strong> and coordinated strategic projects in education, solidarity economy, sustainability and social innovation, with partners such as UNDP, MRV Engenharia and the Bahia state government. His expertise includes budget management, impact indicators and building partnerships with public bodies and private companies.</p>
+            <p>Since 2026 he has coordinated international fundraising at Fiotec, the foundation that supports Fiocruz (Brazil’s Oswaldo Cruz Foundation), and he directs the Institute for Sustainability and Culture.</p>
+            <div class="profile__actions">
+              <a class="btn" id="cv-link" href="../assets/cv/cv-bruno-barboza-muniz.pdf" target="_blank" rel="noopener">Download CV (PDF, in Portuguese)</a>
+              <a class="btn btn--outline" href="#pesquisa" data-tab-link="pesquisa">Publications</a>
+            </div>
+          </div>
+        </div>
+
+        <h3>Career</h3>
+        <ol class="timeline">
+          <li><span class="timeline__when">Current</span><div><strong>Institute for Sustainability and Culture</strong><p>Direction, applied research and fundraising programmes.</p></div></li>
+          <li><span class="timeline__when">2026 —</span><div><strong>Fiotec / Fiocruz</strong><p>Fundraising Coordinator, International Area: foundations, multilateral agencies, development banks and the health and climate agendas.</p></div></li>
+          <li><span class="timeline__when">2021 —</span><div><strong>Humana Povo para Povo Brasil</strong><p>Statutory Director of Projects: leading programmes in education, solidarity economy, sustainability and social innovation.</p></div></li>
+          <li><span class="timeline__when">2016–2021</span><div><strong>Humana Povo para Povo Brasil</strong><p>Project Coordinator: raised nearly R$ 4.5 million (public calls, the Federal Culture Incentive Law, CNPq and corporate ESG programmes).</p></div></li>
+          <li><span class="timeline__when">2017–2022</span><div><strong>University of Coimbra (CES)</strong><p>ERC-funded postdoctoral researcher on the POLITICS project, led by Silvia Rodríguez Maeso: institutional racism, the justice system and policing in Rio de Janeiro and Peru.</p></div></li>
+          <li><span class="timeline__when">2016–2017</span><div><strong>Federal University of Rio de Janeiro (UFRJ)</strong><p>Postdoctoral researcher.</p></div></li>
+          <li><span class="timeline__when">2011–2016</span><div><strong>PhD in Sociology — LSE</strong><p>Thesis on the “Funk é Cultura” (Funk is Culture) movement and the cultural practices of funk in Rio de Janeiro, funded by a CAPES scholarship.</p></div></li>
+          <li><span class="timeline__when">2010–2011</span><div><strong>SEPLAG — Rio de Janeiro State Government</strong><p>Public Policy and Government Management Specialist.</p></div></li>
+        </ol>
+
+        <h3>Education</h3>
+        <ul class="edu">
+          <li><strong>PhD in Sociology</strong><span>London School of Economics and Political Science · 2016 · CAPES scholarship</span><em>Supervisor: Juan Pablo Pardo-Guerra; co-supervisors: Mike Savage and Paul Gilroy</em></li>
+          <li><strong>MA in Sociology and Anthropology</strong><span>PPGSA/UFRJ · 2010 · CAPES scholarship</span><em>“Dub: um estilo? Um gênero? Um vírus?” Supervisor: Marco Antonio Gonçalves</em></li>
+          <li><strong>Postgraduate Certificate in ESG and Corporate Sustainability</strong><span>Getulio Vargas Foundation (FGV) · 2023–2024 · 432 h</span></li>
+          <li><strong>BA in Economics</strong><span>Rio de Janeiro State University (UERJ) · 2007</span><em>“Direitos autorais: libertários, conservadores e reformistas”</em></li>
+          <li><strong>Training programme for Public Policy and Government Management Specialists</strong><span>UFRJ · 2009–2010 · 600 h</span></li>
+        </ul>
+        <p class="langs">Portuguese (native) · fluent English and Spanish · advanced German · intermediate French</p>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="pesquisa" class="tab section" data-tab="pesquisa">
+      <div class="wrap">
+        <p class="num">03 <span></span></p>
+        <h2>Research</h2>
+        <p class="intro">Academic and opinion writing on culture, race, cities, innovation and public policy: journal articles, book chapters, conference papers, thesis, audiovisual work and music. Titles are shown in their original language.</p>
+
+        <div class="feature feature--light" data-destaque></div>
+
+        <div class="filters" role="group" aria-label="Filter publications">
+          <button class="chip is-active" data-filter="todos">All</button>
+          <button class="chip" data-filter="opiniao">Op-eds</button>
+          <button class="chip" data-filter="artigo">Articles</button>
+          <button class="chip" data-filter="capitulo">Chapters</button>
+          <button class="chip" data-filter="anais">Proceedings</button>
+          <button class="chip" data-filter="tese">Thesis</button>
+          <button class="chip" data-filter="audiovisual">Audiovisual and music</button>
+        </div>
+
+        <ul class="pubs" id="pubs"></ul>
+
+        <h3>Conference papers and talks</h3>
+        <p class="intro intro--small">Talks in Brazil, the United Kingdom, Portugal, Peru and Argentina on race, cities, music and public policy.</p>
+        <ol class="events" id="eventos"></ol>
+
+        <h3>Events organised</h3>
+        <ol class="events events--compact" id="organizacao"></ol>
+
+        <h3>Profiles</h3>
+        <ul class="links" id="perfis"></ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projetos" class="tab section section--cream" data-tab="projetos">
+      <div class="wrap">
+        <p class="num">04 <span></span></p>
+        <h2>Projects</h2>
+        <p class="intro">Projects fundraised and coordinated by Bruno Muniz since 2020 in education, solidarity economy, sustainability and culture.</p>
+
+        <div class="cards cards--2" id="projetos-grid"></div>
+
+        <h3>Gallery</h3>
+        <div class="gallery" id="galeria"></div>
+
+        <div class="portfolio-cta">
+          <div>
+            <h3>Full portfolio</h3>
+            <p>See every project, with photos, partners and results (in Portuguese).</p>
+          </div>
+          <a class="btn btn--light" id="portfolio-link" href="#" target="_blank" rel="noopener">Open portfolio ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contato" class="tab section section--dark" data-tab="contato">
+      <div class="wrap contact">
+        <div>
+          <p class="num num--light">05 <span></span></p>
+          <h2>Let’s talk</h2>
+          <p class="lead">Do you have a project, an idea or a funding call in mind? Get in touch.</p>
+        </div>
+        <dl class="contact__list">
+          <div><dt>Email</dt><dd><a href="mailto:bmuniz@gmail.com">bmuniz@gmail.com</a></dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+5521966546065">+55 21 96654-6065</a></dd></div>
+          <div><dt>Location</dt><dd>Rio de Janeiro · RJ · Brazil</dd></div>
+          <div><dt>Legal name</dt><dd>Instituto Sustentabilidade e Cultura LTDA</dd></div>
+          <div><dt>CNPJ (company registration)</dt><dd>42.734.255/0001-28</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="footer__brand"><span class="brand__mark" data-logo></span> Instituto Sustentabilidade e Cultura LTDA</span>
+      <span>CNPJ 42.734.255/0001-28 · Rio de Janeiro, Brazil</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/data-en.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,6 +1,36 @@
 (function () {
   "use strict";
   var data = window.SITE_DATA || {};
+  var root = document.documentElement;
+  var EN = (root.lang || "").slice(0, 2) === "en";
+
+  // Textos da interface nos dois idiomas
+  var UI = EN ? {
+    tipos: { opiniao: "Op-ed", artigo: "Article", capitulo: "Book chapter", anais: "Proceedings", tese: "Thesis", comunicacao: "Talk", audiovisual: "Audiovisual" },
+    acessar: "Open", assistir: "Watch video: ", assistirLabel: "Watch the video", saibaMais: "Learn more",
+    youtube: "Watch on YouTube", ler: "Read", de: " of ", destaque: "Highlight ",
+    pausar: "Pause automatic rotation", retomar: "Resume automatic rotation",
+    vale: ["Research", "valley of death", "Health system"],
+  } : {
+    tipos: { opiniao: "Opinião", artigo: "Artigo", capitulo: "Capítulo", anais: "Anais", tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" },
+    acessar: "Acessar", assistir: "Assistir vídeo: ", assistirLabel: "Assistir ao vídeo", saibaMais: "Saiba mais",
+    youtube: "Ver no YouTube", ler: "Ler", de: " de ", destaque: "Destaque ",
+    pausar: "Pausar troca automática", retomar: "Retomar troca automática",
+    vale: ["Pesquisa", "vale da morte", "Sistema de saúde"],
+  };
+
+  // A versão em inglês fica em /en/: caminhos "assets/..." ganham o prefixo "../"
+  var BASE = root.getAttribute("data-base") || "";
+  function asset(p) { return p && /^assets\//.test(p) ? BASE + p : p; }
+
+  // Seletor de idioma: mantém a aba aberta ao trocar de idioma
+  function syncLang() {
+    document.querySelectorAll("[data-lang-link]").forEach(function (a) {
+      a.href = a.getAttribute("data-lang-link") + location.hash;
+    });
+  }
+  syncLang();
+  window.addEventListener("hashchange", syncLang);
 
   // Logo (mesmo desenho de assets/img/logo.svg, inline para herdar a cor do texto)
   var LOGO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 100" role="img" aria-label="Instituto Sustentabilidade e Cultura"> <circle cx="72" cy="48" r="31" fill="#899b5d"/> <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round">  <path d="M43.1,16.6 L45.8,14.2 L48.9,11.9 L51.8,13.7 L55.2,12.9 L57.9,14.7 L60.0,17.4 L61.7,20.4 L64.7,19.9 L67.9,19.5 L69.4,21.7 L71.3,23.2 L73.5,24.6 L75.6,26.2 L73.4,30.8 L76.7,31.0 L79.5,31.8 L81.8,33.2 L81.6,35.7 L81.4,38.1 L83.1,39.9 L78.8,43.0 L83.6,43.9 L82.8,45.9 L82.9,47.8 L82.9,49.6 L83.1,51.5 L83.8,53.4 L79.2,54.7 L82.5,57.2 L83.0,59.4 L82.0,61.3 L81.9,63.5 L79.3,64.6 L77.7,66.1 L75.0,66.8 L77.3,70.8 L75.9,72.6 L74.5,74.5 L73.5,76.8 L71.2,77.9 L68.6,78.4 L65.2,77.4 L65.6,82.1 L63.2,82.6 L61.8,85.0 L59.5,85.8 L57.5,87.2 L54.8,86.6 L51.8,83.0 L50.0,88.3 L47.3,86.5 L44.7,87.9 L41.9,88.8 L39.6,86.1 L37.1,85.8 L35.6,81.9 L31.6,84.6 L28.4,84.3 L25.8,82.6 L22.7,81.7 L21.7,78.1 L19.2,76.4 L20.3,71.5 L15.7,71.6 L13.7,69.3 L10.8,67.4 L9.2,64.6 L10.0,61.1 L9.4,58.2 L12.8,54.7 L8.5,52.6 L7.8,50.0 L6.4,47.2 L7.2,44.5 L9.8,42.3 L10.8,39.9 L14.5,38.5 L13.8,35.3 L13.2,31.7 L15.2,29.4 L17.0,27.1 L19.4,25.3 L20.4,22.2 Z"/>  <path d="M45.8,48.0 Q45.9,33.3 43.1,16.6 M46.9,48.2 Q55.0,35.9 61.7,20.4 M47.6,48.9 Q60.4,41.5 73.4,30.8 M48.0,49.6 Q62.6,47.8 78.8,43.0 M48.0,50.3 Q62.3,53.6 79.2,54.7 M47.7,51.0 Q59.8,59.5 75.0,66.8 M47.1,51.6 Q54.5,64.4 65.2,77.4 M46.3,52.0 Q47.6,66.7 51.8,83.0 M45.4,51.9 Q39.6,65.5 35.6,81.9 M44.5,51.3 Q32.3,59.7 20.3,71.5 M44.0,50.3 Q29.3,51.0 12.8,54.7 M44.1,49.3 Q30.8,43.0 14.5,38.5"/>  <rect x="43.8" y="47.8" width="4.4" height="4.4" transform="rotate(20 46 50)"/> </g></svg>';
@@ -17,10 +47,10 @@
 
   // Links configuráveis
   if (data.portfolioUrl) document.getElementById("portfolio-link").href = data.portfolioUrl;
-  if (data.cvUrl) document.getElementById("cv-link").href = data.cvUrl;
+  if (data.cvUrl) document.getElementById("cv-link").href = asset(data.cvUrl);
 
   // Publicações
-  var TIPOS = { opiniao: "Opinião", artigo: "Artigo", capitulo: "Capítulo", anais: "Anais",  tese: "Tese", comunicacao: "Comunicação", audiovisual: "Audiovisual" };
+  var TIPOS = UI.tipos;
   var pubs = (data.publicacoes || []).slice().sort(function (a, b) { return (b.ano || 0) - (a.ano || 0); });
   var pubList = document.getElementById("pubs");
   pubList.innerHTML = pubs.map(function (p) {
@@ -30,7 +60,7 @@
       '<div class="pub__body"><h4>' + esc(p.titulo) + "</h4>" +
       '<p class="pub__authors">' + esc(p.autores) + " · <em>" + esc(p.veiculo) + "</em></p>" +
       (p.resumo ? '<p class="pub__abstract">' + esc(p.resumo) + "</p>" : "") +
-      (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.rotulo || "Acessar") + " ↗</a>" : "") +
+      (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.rotulo || UI.acessar) + " ↗</a>" : "") +
       "</div></li>";
   }).join("");
 
@@ -65,10 +95,10 @@
   // Projetos
   document.getElementById("projetos-grid").innerHTML = (data.projetos || []).map(function (p) {
     var media = p.video
-      ? '<button type="button" class="project__img project__play" data-video="' + esc(p.video) + '" aria-label="Assistir vídeo: ' + esc(p.titulo) + '">' +
-        (p.imagem ? '<img src="' + esc(p.imagem) + '" alt="">' : "") + '<span class="play" aria-hidden="true"></span><span class="play__label">Assistir ao vídeo</span></button>'
+      ? '<button type="button" class="project__img project__play" data-video="' + esc(p.video) + '" aria-label="' + esc(UI.assistir + p.titulo) + '">' +
+        (p.imagem ? '<img src="' + esc(asset(p.imagem)) + '" alt="">' : "") + '<span class="play" aria-hidden="true"></span><span class="play__label">' + esc(UI.assistirLabel) + "</span></button>"
       : p.imagem
-      ? '<img class="project__img" src="' + esc(p.imagem) + '" alt="" loading="lazy">'
+      ? '<img class="project__img" src="' + esc(asset(p.imagem)) + '" alt="" loading="lazy">'
       : '<div class="project__img project__img--empty" aria-hidden="true">' + LOGO + "</div>";
     return '<article class="card project">' + media +
       '<div class="project__body"><p class="project__cat">' + esc(p.categoria) + "</p>" +
@@ -76,8 +106,8 @@
       (p.periodo ? '<p class="project__when">' + esc(p.periodo) + "</p>" : "") +
       "<p>" + esc(p.descricao) + "</p>" +
       (p.numeros && p.numeros.length ? '<ul class="project__nums">' + p.numeros.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
-      (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">Saiba mais ↗</a>' : "") +
-      (p.video ? '<a class="pub__link" href="https://www.youtube.com/watch?v=' + esc(p.video) + '" target="_blank" rel="noopener">Ver no YouTube ↗</a>' : "") +
+      (p.url ? '<a class="pub__link" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(UI.saibaMais) + " ↗</a>" : "") +
+      (p.video ? '<a class="pub__link" href="https://www.youtube.com/watch?v=' + esc(p.video) + '" target="_blank" rel="noopener">' + esc(UI.youtube) + " ↗</a>" : "") +
       "</div></article>";
   }).join("");
 
@@ -95,15 +125,15 @@
       '<path d="M424 80 L440 92 L424 104" class="vale__line"/>' +
       '<circle cx="40" cy="120" r="7" class="vale__dot"/>' +
       '<circle cx="240" cy="300" r="7" class="vale__dot vale__dot--low"/>' +
-      '<text x="40" y="96" class="vale__label">Pesquisa</text>' +
-      '<text x="240" y="364" text-anchor="middle" class="vale__label vale__label--em">vale da morte</text>' +
-      '<text x="440" y="66" text-anchor="end" class="vale__label">Sistema de saúde</text>' +
+      '<text x="40" y="96" class="vale__label">' + UI.vale[0] + "</text>" +
+      '<text x="240" y="364" text-anchor="middle" class="vale__label vale__label--em">' + UI.vale[1] + "</text>" +
+      '<text x="440" y="66" text-anchor="end" class="vale__label">' + UI.vale[2] + "</text>" +
       "</svg>";
 
     function art(a) {
       if (!a) return '<div class="hero__art" aria-hidden="true">' + LOGO + "</div>";
       if (a.ilustracao === "vale") return '<div class="hero__art hero__art--vale">' + VALE + "</div>";
-      return '<figure class="art-photo"><div class="art-photo__frame"><img src="' + esc(a.imagem) + '" alt="' + esc(a.legenda || "") + '">' +
+      return '<figure class="art-photo"><div class="art-photo__frame"><img src="' + esc(asset(a.imagem)) + '" alt="' + esc(a.legenda || "") + '">' +
         (a.selo ? '<p class="art-photo__badge"><strong>' + esc(a.selo.numero) + "</strong>" + esc(a.selo.rotulo || "") + "</p>" : "") +
         "</div>" + (a.legenda ? "<figcaption>" + esc(a.legenda) + "</figcaption>" : "") + "</figure>";
     }
@@ -113,7 +143,7 @@
       var btn = n.link
         ? '<a class="btn btn--light" href="' + esc(n.link) + '"' +
           (external ? ' target="_blank" rel="noopener"' : ' data-tab-link="' + esc(n.link.slice(1)) + '"') + ">" +
-          esc(n.botao || "Saiba mais") + (external ? " ↗" : "") + "</a>"
+          esc(n.botao || UI.saibaMais) + (external ? " ↗" : "") + "</a>"
         : "";
       var el = document.createElement("article");
       el.className = "slide";
@@ -137,10 +167,10 @@
     box.style.setProperty("--carousel-delay", DELAY + "ms");
 
     slides.forEach(function (sl, i) {
-      sl.setAttribute("aria-label", (i + 1) + " de " + slides.length);
+      sl.setAttribute("aria-label", (i + 1) + UI.de + slides.length);
       var d = document.createElement("button");
       d.type = "button";
-      d.setAttribute("aria-label", "Destaque " + (i + 1));
+      d.setAttribute("aria-label", UI.destaque + (i + 1));
       d.addEventListener("click", function () { go(i); restart(); });
       dotsBox.appendChild(d);
     });
@@ -181,7 +211,7 @@
     pauseBtn.addEventListener("click", function () {
       paused = !paused;
       pauseBtn.setAttribute("aria-pressed", String(paused));
-      pauseBtn.setAttribute("aria-label", paused ? "Retomar troca automática" : "Pausar troca automática");
+      pauseBtn.setAttribute("aria-label", paused ? UI.retomar : UI.pausar);
       pauseBtn.textContent = paused ? "▶" : "❚❚";
       restart();
     });
@@ -213,7 +243,7 @@
   }).join("");
   document.getElementById("mosaic").innerHTML = (data.projetos || []).filter(function (p) { return p.imagem; }).slice(0, 4).map(function (p) {
     return '<a class="mosaic__item" href="#projetos" data-tab-link="projetos">' +
-      '<img src="' + esc(p.imagem) + '" alt="" loading="lazy">' +
+      '<img src="' + esc(asset(p.imagem)) + '" alt="" loading="lazy">' +
       '<span class="mosaic__cap"><small>' + esc(p.categoria) + "</small>" + esc(p.titulo) + "</span></a>";
   }).join("");
 
@@ -223,7 +253,7 @@
     if (!d) { el.remove(); return; }
     el.innerHTML = '<p class="feature__tag">' + esc(d.selo) + "</p>" +
       "<h3>" + esc(d.titulo) + "</h3><p>" + esc(d.texto) + "</p>" +
-      '<a class="btn btn--light" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.botao || "Ler") + " ↗</a>";
+      '<a class="btn btn--light" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.botao || UI.ler) + " ↗</a>";
   });
 
   // Vídeo: carrega o YouTube só quando a pessoa clica
@@ -242,7 +272,7 @@
 
   // Galeria (Projetos)
   document.getElementById("galeria").innerHTML = (data.galeria || []).map(function (g) {
-    return '<figure><img src="' + esc(g.src) + '" alt="' + esc(g.legenda) + '" loading="lazy"><figcaption>' + esc(g.legenda) + "</figcaption></figure>";
+    return '<figure><img src="' + esc(asset(g.src)) + '" alt="' + esc(g.legenda) + '" loading="lazy"><figcaption>' + esc(g.legenda) + "</figcaption></figure>";
   }).join("");
 
   // Abas (navegação por hash)
